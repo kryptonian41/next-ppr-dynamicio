@@ -24,22 +24,3 @@ export async function RandomPokemonList({ delay }: { delay?: number }) {
     </div>
   );
 }
-
-export const cachedGetRandomPokemon = async () => {
-  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10");
-  // Randomly select 10 pokemon
-  const data = await response.json();
-  return data.results;
-};
-
-export async function PokemonList() {
-  const randomPokemon = await cachedGetRandomPokemon();
-
-  return (
-    <div>
-      {randomPokemon.map((pokemon: { name: string }) => (
-        <div key={pokemon.name}>{pokemon.name}</div>
-      ))}
-    </div>
-  );
-}
