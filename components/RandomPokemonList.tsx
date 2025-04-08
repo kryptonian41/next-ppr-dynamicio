@@ -1,3 +1,5 @@
+import { connection } from "next/server";
+
 export const getRandomPokemon = async (delay?: number) => {
   // delay the response
   await new Promise((resolve) => setTimeout(resolve, delay || 0));
@@ -12,6 +14,7 @@ export const getRandomPokemon = async (delay?: number) => {
 };
 
 export async function RandomPokemonList({ delay }: { delay?: number }) {
+  await connection();
   const randomPokemon = await getRandomPokemon(delay);
 
   return (
