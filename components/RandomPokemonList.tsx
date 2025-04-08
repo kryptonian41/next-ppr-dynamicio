@@ -1,4 +1,7 @@
-export const getRandomPokemon = async () => {
+export const getRandomPokemon = async (delay?: number) => {
+  // delay the response
+  await new Promise((resolve) => setTimeout(resolve, delay || 0));
+
   const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
   // Randomly select 10 pokemon
   const data = await response.json();
@@ -8,8 +11,8 @@ export const getRandomPokemon = async () => {
   return randomPokemon;
 };
 
-export const RandomPokemonList = async () => {
-  const randomPokemon = await getRandomPokemon();
+export async function RandomPokemonList({ delay }: { delay?: number }) {
+  const randomPokemon = await getRandomPokemon(delay);
   return (
     <div>
       {randomPokemon.map((pokemon: { name: string }) => (
@@ -17,4 +20,4 @@ export const RandomPokemonList = async () => {
       ))}
     </div>
   );
-};
+}
