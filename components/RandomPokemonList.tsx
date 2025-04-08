@@ -1,10 +1,10 @@
-import { connection } from "next/server";
-
 export const getRandomPokemon = async (delay?: number) => {
   // delay the response
   await new Promise((resolve) => setTimeout(resolve, delay || 0));
 
-  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
+  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151", {
+    cache: "no-store",
+  });
   // Randomly select 10 pokemon
   const data = await response.json();
   const randomPokemon = data.results
@@ -14,8 +14,26 @@ export const getRandomPokemon = async (delay?: number) => {
 };
 
 export async function RandomPokemonList({ delay }: { delay?: number }) {
-  await connection();
   const randomPokemon = await getRandomPokemon(delay);
+
+  return (
+    <div>
+      {randomPokemon.map((pokemon: { name: string }) => (
+        <div key={pokemon.name}>{pokemon.name}</div>
+      ))}
+    </div>
+  );
+}
+
+export const cachedGetRandomPokemon = async () => {
+  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10");
+  // Randomly select 10 pokemon
+  const data = await response.json();
+  return data.results;
+};
+
+export async function PokemonList() {
+  const randomPokemon = await cachedGetRandomPokemon();
 
   return (
     <div>
