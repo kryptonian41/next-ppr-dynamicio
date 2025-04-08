@@ -13,6 +13,7 @@ export const getRandomPokemon = async (delay?: number) => {
 
 export async function RandomPokemonList({ delay }: { delay?: number }) {
   const randomPokemon = await getRandomPokemon(delay);
+
   return (
     <div>
       {randomPokemon.map((pokemon: { name: string }) => (

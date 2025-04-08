@@ -1,20 +1,24 @@
 import { RandomPokemonList } from "@/components/RandomPokemonList";
+import { WeatherInfo } from "@/components/WeatherInfo";
 import { Suspense } from "react";
+
+const Loading = () => {
+  return <div>Loading...</div>;
+};
 
 export default function Page() {
   return (
     <div className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-      <p>Pokemon list</p>
-      {/* <RandomPokemonList /> */}
+      <p>Static Content</p>
 
       <p>Pokemon list with delay</p>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <RandomPokemonList delay={2000} />
       </Suspense>
 
-      <p>Pokemon list with delay</p>
-      <Suspense fallback={<div>Loading...</div>}>
-        <RandomPokemonList delay={3000} />
+      <p>Weather info</p>
+      <Suspense fallback={<Loading />}>
+        <WeatherInfo />
       </Suspense>
     </div>
   );
