@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
@@ -6,24 +7,13 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-xl font-bold">PokeNext</div>
         <div className="space-x-4">
-          <a
+          <Link
             href="/"
             className="text-white hover:text-blue-200 transition-colors"
           >
             Home
-          </a>
-          <a
-            href="/about"
-            className="text-white hover:text-blue-200 transition-colors"
-          >
-            About
-          </a>
-          <a
-            href="/favorites"
-            className="text-white hover:text-blue-200 transition-colors"
-          >
-            Favorites
-          </a>
+          </Link>
+          <Link href="/pokemon">Pokemon</Link>
         </div>
       </div>
     </nav>
